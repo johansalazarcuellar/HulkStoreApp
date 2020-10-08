@@ -1,0 +1,60 @@
+<div th:with="disableFields=!${editMode} and ${#authorization.expression('hasRole(''ROLE_CLIENT'')')}">
+	<form id="productForm" th:object="${productForm}" method="post" class="form" role="form" th:action="${editMode}?@{/editProduct}:@{/productForm}">
+		<input class="form-control" type="hidden" th:field="${productForm.id}" th:if="${editMode}">
+		<div class="form-group row">
+			<label class="col-lg-3 col-form-label form-control-label">Descripcion:</label>
+			<div class="col-lg-9">
+				<input class="form-control" type="text" th:field="${productForm.description}" th:disabled="${disableFields}">
+				<div class="alert-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Name Error</div>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-lg-3 col-form-label form-control-label">Categoria:</label>
+			<div class="col-lg-9">
+<!-- 				<input class="form-control" type="text" th:field="${productForm.category}" th:disabled="${disableFields}"> -->
+				<select class="browser-default custom-select form-control" th:field="${productForm.category}" th:disabled="${disableFields}">
+				  <option selected value="">Seleccionar...</option>
+				  <option value="Marvel">Marvel Universe</option>
+				  <option value="Dc">Dc Comics</option>
+				</select>
+				<div class="alert-danger" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Name Error</div>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-lg-3 col-form-label form-control-label">Tipo:</label>
+			<div class="col-lg-9">
+				<select class="browser-default custom-select form-control" th:field="${productForm.type}" th:disabled="${disableFields}">
+				  <option selected value="">Seleccionar...</option>
+				  <option value="Utiles">Utiles</option>
+				  <option value="Figuras">Figuras</option>
+				  <option value="Posters">Posters</option>
+				  <option value="Accesorios">Accesorios</option>
+				  <option value="Otros">Otros</option>
+				</select>
+				<div class="alert-danger" th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Name Error</div>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-lg-3 col-form-label form-control-label">Cantidad:</label>
+			<div class="col-lg-9">
+				<input class="form-control" type="number" th:field="${productForm.quantity}" th:disabled="${disableFields}">
+				<div class="alert-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Name Error</div>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-lg-3 col-form-label form-control-label">Precio:</label>
+			<div class="col-lg-9">
+				<input class="form-control" type="number" th:field="${productForm.price}" th:disabled="${disableFields}">
+				<div class="alert-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Name Error</div>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-lg-12 text-center">
+				<a class="btn btn-secondary" th:href="@{'/productForm/cancel'}">Cancelar</a>
+				<input type="submit" class="btn btn-primary" th:value="${editMode}?'Guardar cambios':'Crear producto'">
+			</div>
+		</div>
+		<div class="alert alert-danger text-center" th:if="${formErrorMessage}" th:text="${formErrorMessage}">Error Message</div>
+		<div class="alert alert-success text-center d-none" th:if="${editMode}" id="formSuccess">Success Message</div>
+	</form>
+</div>	

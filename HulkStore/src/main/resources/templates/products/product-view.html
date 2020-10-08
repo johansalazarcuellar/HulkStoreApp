@@ -1,0 +1,37 @@
+<div th:include="commons/header.html" th:remove="tag"></div>
+<div class="container">
+	<div class="mx-auto col-sm-12 main-section" id="myTab" role="tablist">
+		<ul class="nav nav-tabs justify-content-end">
+			<li class="nav-item">
+				<a class="nav-link" th:classappend=" ${listTab}" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false"><i class="fas fa-list"></i>&nbsp;Listado de Productos</a>
+			</li>
+			<li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
+				<a class="nav-link" th:classappend=" ${formTab}" id="form-tab" data-toggle="tab" href="#form" role="tab" aria-controls="form" aria-selected="true"><i class="fas fa-plus"></i>&nbsp;Agregar Producto</a>				   	
+			</li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show" th:classappend=" ${listTab}" id="list" role="tabpanel" aria-labelledby="list-tab">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="title_card_header">Productos</h4>
+					</div>
+					<div class="card-body">
+						<div th:include="products/product-list.html" th:remove="tag"></div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade show" th:classappend=" ${formTab}" id="form" role="tabpanel" aria-labelledby="form-tab">
+				<div class="card">
+					<div class="card-header">
+						<h4>Informacion de producto</h4>
+					</div>
+					<div class="card-body">
+						<div th:include="products/product-form.html" th:remove="tag"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:include="products/confirm-delete-dialog.html" th:remove="tag"></div>
+<div th:include="commons/footer.html" th:remove="tag"></div>
