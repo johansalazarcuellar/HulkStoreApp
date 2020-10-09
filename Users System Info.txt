@@ -1,0 +1,8 @@
+nombre de usuario: admin
+contrasena: 1234
+
+nombre de usuario: jperez
+contrasena: 000
+
+nombre de usuario: jhon
+contrasena: 111
